@@ -1,6 +1,8 @@
 package com.rafaeldeluca.ecommerce_spring_jpa.springboot.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -23,6 +25,7 @@ import java.time.LocalDateTime;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment column
     private Long Id;
     @Column(nullable = false, length = 80)
     private String name;
@@ -30,8 +33,11 @@ public class Product {
     private String description;
     @Column(name = "stock_keeping_unit", nullable = false,length = 20)
     private String sku;
+    @Column(scale = 2)
     private BigDecimal price;
+    @CreationTimestamp
     private LocalDateTime createdDate;
+    @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
 
     public Long getId() {
