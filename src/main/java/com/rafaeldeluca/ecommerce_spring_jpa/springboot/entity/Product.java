@@ -1,17 +1,34 @@
 package com.rafaeldeluca.ecommerce_spring_jpa.springboot.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(
+        name="tb_products",
+        schema = "ecommerce",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "sku_unique",
+                        columnNames = "stock_keeping_unit"
+                ),
+                @UniqueConstraint(
+                        name = "name_unique",
+                        columnNames = "name"
+                )
+        }
+)
 public class Product {
 
     @Id
     private Long Id;
+    @Column(nullable = false, length = 80)
     private String name;
+    @Column(length = 200)
     private String description;
+    @Column(name = "stock_keeping_unit", nullable = false,length = 20)
     private String sku;
     private BigDecimal price;
     private LocalDateTime createdDate;
