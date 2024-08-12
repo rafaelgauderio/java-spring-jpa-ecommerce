@@ -25,7 +25,14 @@ import java.time.LocalDateTime;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment column
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+                    generator = "tb_product_generator")
+    @SequenceGenerator(
+            name = "name_generator",
+            sequenceName = "product_sequence_name",
+            allocationSize = 50
+    )
     private Long Id;
     @Column(nullable = false, length = 80)
     private String name;
