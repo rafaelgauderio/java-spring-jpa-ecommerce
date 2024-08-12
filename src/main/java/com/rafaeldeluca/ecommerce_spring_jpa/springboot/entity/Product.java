@@ -1,6 +1,10 @@
 package com.rafaeldeluca.ecommerce_spring_jpa.springboot.entity;
 
 import jakarta.persistence.*;
+import jdk.jfr.DataAmount;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +12,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(
         name="tb_products",
         schema = "ecommerce",
@@ -22,6 +29,7 @@ import java.time.LocalDateTime;
                 )
         }
 )
+
 public class Product {
 
     @Id
@@ -34,19 +42,26 @@ public class Product {
             allocationSize = 50
     )
     private Long Id;
+
     @Column(nullable = false, length = 80)
     private String name;
+
     @Column(length = 200)
     private String description;
+
     @Column(name = "stock_keeping_unit", nullable = false,length = 20)
     private String sku;
+
     @Column(scale = 2)
     private BigDecimal price;
+
     @CreationTimestamp
     private LocalDateTime createdDate;
+
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
 
+    /*
     public Long getId() {
         return Id;
     }
@@ -102,4 +117,6 @@ public class Product {
     public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
+
+     */
 }
